@@ -3,8 +3,6 @@ version: 2
 defaults: &defaults
   docker:
     - image: rdaniels6813/rust-bin:${CIRCLE_JOB}
-      environment:
-        CIRCLE_JOB: ${CIRCLE_JOB}
   steps:
     - checkout
     - run:
@@ -31,6 +29,18 @@ jobs:
   "x86_64-unknown-linux-musl":
     <<: *defaults
 
+  deploy:
+    docker:
+      - image: rdaniels6813/semantic-release-alpine:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /root/project
+      - run:
+          name: show contents
+          command: ls -alhR target
+
 workflows:
   version: 2
   build:
@@ -40,3 +50,6 @@ workflows:
       # - "x86_64-pc-windows-gnu"
       # - "x86_64-unknown-linux-gnu"
       - "x86_64-unknown-linux-musl"
+      - deploy
+          requires:
+            - "x86_64-unknown-linux-musl"
