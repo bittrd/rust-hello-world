@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/bittrd/rust-hello-world/compare/v1.0.2...v1.0.3) (2019-07-25)
+
+
+### Bug Fixes
+
+* use name instead of label ([33a975c](https://github.com/bittrd/rust-hello-world/commit/33a975c))
+
 ## [1.0.2](https://github.com/bittrd/rust-hello-world/compare/v1.0.1...v1.0.2) (2019-07-25)
 
 
