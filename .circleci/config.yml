@@ -9,7 +9,7 @@ defaults: &defaults
     - checkout
     - run:
         name: cargo build
-        command: cargo build --release --target=${CIRCLE_JOB}
+        command: cargo build --release --target=${CIRCLE_JOB} && pwd && ls -alh
     - persist_to_workspace:
         root: target/
         paths:
