@@ -3,6 +3,8 @@ version: 2
 defaults: &defaults
   docker:
     - image: rdaniels6813/rust-bin:${CIRCLE_JOB}
+  environment:
+    CIRCLE_JOB: ${CIRCLE_JOB}
   steps:
     - checkout
     - run:
@@ -11,7 +13,7 @@ defaults: &defaults
     - persist_to_workspace:
         root: target/
         paths:
-          - ${CIRCLE_JOB}/release/rust-hello-world
+          - ${CIRCLE_JOB}/release/rust-hello-world*
 
 jobs:
   # "armv7-unknown-linux-gnueabihf":
