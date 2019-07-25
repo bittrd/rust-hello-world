@@ -11,8 +11,7 @@ defaults: &defaults
     - persist_to_workspace:
         root: target/
         paths:
-          - target/${CIRCLE_JOB}/release/rust-hello-world
-          - target/${CIRCLE_JOB}/release/rust-hello-world.exe
+          - target/${CIRCLE_JOB}/release/rust-hello-world*
 
 jobs:
   # "armv7-unknown-linux-gnueabihf":
