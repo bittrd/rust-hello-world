@@ -1,0 +1,41 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: rdaniels6813/rust-bin:${CIRCLE_JOB}
+  steps:
+    - checkout
+    - run:
+        name: cargo build
+        command: cargo build --release --target=${CIRCLE_JOB}
+    - persist_to_workspace:
+        root: target/
+        paths:
+          - target/${CIRCLE_JOB}/release/rustem
+          - target/${CIRCLE_JOB}/release/rustem.exe
+
+jobs:
+  # "armv7-unknown-linux-gnueabihf":
+  #   <<: *defaults
+
+  # "x86_64-apple-darwin":
+  #   <<: *defaults
+
+  # "x86_64-pc-windows-gnu":
+  #   <<: *defaults
+
+  # "x86_64-unknown-linux-gnu":
+  #   <<: *defaults
+
+  "x86_64-unknown-linux-musl":
+    <<: *defaults
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "armv7-unknown-linux-gnueabihf"
+      # - "x86_64-apple-darwin"
+      # - "x86_64-pc-windows-gnu"
+      # - "x86_64-unknown-linux-gnu"
+      # - "x86_64-unknown-linux-musl"
