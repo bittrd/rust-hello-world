@@ -3,8 +3,8 @@ version: 2
 defaults: &defaults
   docker:
     - image: rdaniels6813/rust-bin:${CIRCLE_JOB}
-  environment:
-    CIRCLE_JOB: ${CIRCLE_JOB}
+      environment:
+        CIRCLE_JOB: ${CIRCLE_JOB}
   steps:
     - checkout
     - run:
