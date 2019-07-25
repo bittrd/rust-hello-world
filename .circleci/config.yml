@@ -11,8 +11,8 @@ defaults: &defaults
     - persist_to_workspace:
         root: target/
         paths:
-          - target/${CIRCLE_JOB}/release/rustem
-          - target/${CIRCLE_JOB}/release/rustem.exe
+          - target/${CIRCLE_JOB}/release/rust-hello-world
+          - target/${CIRCLE_JOB}/release/rust-hello-world.exe
 
 jobs:
   # "armv7-unknown-linux-gnueabihf":
@@ -34,8 +34,8 @@ workflows:
   version: 2
   build:
     jobs:
-      - "armv7-unknown-linux-gnueabihf"
+      # - "armv7-unknown-linux-gnueabihf"
       # - "x86_64-apple-darwin"
       # - "x86_64-pc-windows-gnu"
       # - "x86_64-unknown-linux-gnu"
-      # - "x86_64-unknown-linux-musl"
+      - "x86_64-unknown-linux-musl"
