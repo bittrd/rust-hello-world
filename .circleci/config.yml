@@ -9,11 +9,11 @@ defaults: &defaults
     - checkout
     - run:
         name: cargo build
-        command: cargo build --release --target=${CIRCLE_JOB} && pwd && ls -alh
+        command: cargo build --release --target=${CIRCLE_JOB} && ls -alh target
     - persist_to_workspace:
-        root: target/
+        root: /root/project/
         paths:
-          - ${CIRCLE_JOB}/release/rust-hello-world*
+          - target/${CIRCLE_JOB}/release/rust-hello-world*
 
 jobs:
   # "armv7-unknown-linux-gnueabihf":
