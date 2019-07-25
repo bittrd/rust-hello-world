@@ -14,17 +14,17 @@ defaults: &defaults
           - target/*/release/rust-hello-world*
 
 jobs:
-  # "armv7-unknown-linux-gnueabihf":
-  #   <<: *defaults
+  "armv7-unknown-linux-gnueabihf":
+    <<: *defaults
 
-  # "x86_64-apple-darwin":
-  #   <<: *defaults
+  "x86_64-apple-darwin":
+    <<: *defaults
 
-  # "x86_64-pc-windows-gnu":
-  #   <<: *defaults
+  "x86_64-pc-windows-gnu":
+    <<: *defaults
 
-  # "x86_64-unknown-linux-gnu":
-  #   <<: *defaults
+  "x86_64-unknown-linux-gnu":
+    <<: *defaults
 
   "x86_64-unknown-linux-musl":
     <<: *defaults
@@ -45,11 +45,15 @@ workflows:
   version: 2
   build:
     jobs:
-      # - "armv7-unknown-linux-gnueabihf"
-      # - "x86_64-apple-darwin"
-      # - "x86_64-pc-windows-gnu"
-      # - "x86_64-unknown-linux-gnu"
+      - "armv7-unknown-linux-gnueabihf"
+      - "x86_64-apple-darwin"
+      - "x86_64-pc-windows-gnu"
+      - "x86_64-unknown-linux-gnu"
       - "x86_64-unknown-linux-musl"
       - release:
           requires:
             - "x86_64-unknown-linux-musl"
+            - "x86_64-unknown-linux-gnu"
+            - "x86_64-pc-windows-gnu"
+            - "x86_64-apple-darwin"
+            - "armv7-unknown-linux-gnueabihf"
