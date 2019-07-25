@@ -38,8 +38,8 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: /root/project
       - run:
-          name: show contents
-          command: ls -alhR target
+          name: Release
+          command: semantic-release
 
 workflows:
   version: 2
