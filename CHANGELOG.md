@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/bittrd/rust-hello-world/compare/v1.0.1...v1.0.2) (2019-07-25)
+
+
+### Bug Fixes
+
+* add release assets for all targets ([54c8190](https://github.com/bittrd/rust-hello-world/commit/54c8190))
+
 ## [1.0.1](https://github.com/bittrd/rust-hello-world/compare/v1.0.0...v1.0.1) (2019-07-25)
 
 
