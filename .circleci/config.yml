@@ -6,6 +6,9 @@ defaults: &defaults
   steps:
     - checkout
     - run:
+        name: cargo test
+        command: cargo test --release --target=${CIRCLE_JOB}
+    - run:
         name: cargo build
         command: cargo build --release --target=${CIRCLE_JOB}
     - persist_to_workspace:
