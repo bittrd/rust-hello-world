@@ -34,6 +34,33 @@ jobs:
 
   "x86_64-unknown-linux-gnu":
     <<: *defaults
+  
+  coverage:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Download rustup
+          command: |
+            wget https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init
+            chmod +x rustup-init
+      - run:
+          name: Install Rust
+          command: |
+            ./rustup-init -y --no-modify-path --default-toolchain stable
+            rm rustup-init
+            echo 'export PATH=$HOME/.cargo/bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Install Tarpaulin
+          command: cargo install cargo-tarpaulin
+          environment:
+            RUSTFLAGS: --cfg procmacro2_semver_exempt
+      - run:
+          name: Generate coverage report
+          command: cargo tarpaulin --out Xml --ignore-tests
+      - run:
+          name: Upload to codecov.io
+          command: bash <(curl -s https://codecov.io/bash) -Z -f cobertura.xml
 
   release:
     docker:
@@ -56,6 +83,16 @@ workflows:
       - "x86_64-pc-windows-gnu"
       - "x86_64-unknown-linux-gnu"
       - "x86_64-unknown-linux-musl"
+      - coverage:
+          requires:
+            - "x86_64-unknown-linux-musl"
+            - "x86_64-unknown-linux-gnu"
+            - "x86_64-pc-windows-gnu"
+            - "x86_64-apple-darwin"
+            - "armv7-unknown-linux-gnueabihf"
+          filters:
+            branches:
+              only: master
       - release:
           requires:
             - "x86_64-unknown-linux-musl"
