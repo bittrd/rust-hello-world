@@ -7,7 +7,7 @@ defaults: &defaults
     - checkout
     - run:
         name: cargo test
-        command: cargo test --release --target=${CIRCLE_JOB}
+        command: if [ "${CIRCLE_JOB}" = "x86_64-unknown-linux-gnu" ]; then cargo test --release --target=${CIRCLE_JOB}; else echo "skipped tests"; fi
     - run:
         name: cargo build
         command: cargo build --release --target=${CIRCLE_JOB}
