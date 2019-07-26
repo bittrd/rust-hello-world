@@ -11,6 +11,9 @@ defaults: &defaults
     - run:
         name: cargo build
         command: cargo build --release --target=${CIRCLE_JOB}
+    - run:
+        name: coverage
+        command: if [ "${CIRCLE_JOB}" = "x86_64-unknown-linux-gnu" ]; then cargo tarpaulin --release --ignore-tests -o Xml && bash <(curl -s https://codecov.io/bash); else echo "skipped coverage"; fi
     - persist_to_workspace:
         root: /root/project/
         paths:
@@ -26,10 +29,10 @@ jobs:
   "x86_64-pc-windows-gnu":
     <<: *defaults
 
-  "x86_64-unknown-linux-gnu":
+  "x86_64-unknown-linux-musl":
     <<: *defaults
 
-  "x86_64-unknown-linux-musl":
+  "x86_64-unknown-linux-gnu":
     <<: *defaults
 
   release:

@@ -14,4 +14,8 @@ mod tests {
     fn test_add() {
         assert_eq!(add(),4)
     }
+    #[test]
+    fn test_main() {
+        main()
+    }
 }
