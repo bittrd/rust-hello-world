@@ -1,5 +1,5 @@
 # rust-hello-world
-Hello world CLI template with CI/CD written in rust.
+Hello world CLI template written in rust, with CI/CD.
 
 To use:
 1. Create your project using this template.  
