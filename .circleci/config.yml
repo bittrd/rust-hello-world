@@ -57,3 +57,6 @@ workflows:
             - "x86_64-pc-windows-gnu"
             - "x86_64-apple-darwin"
             - "armv7-unknown-linux-gnueabihf"
+          filters:
+            branches:
+              only: master
